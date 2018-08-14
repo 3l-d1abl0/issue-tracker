@@ -77,16 +77,16 @@ python api.py
   Authorization : JWT <access_token>
   ```
 * #### POST localhost:8000/issue/
- - Request to create the issue with the following body
- ```
- {
-  "title" : "New Issue Title",
-  "description" : "Some Description",
-  "author" : "creator@email.com",
-  "assigned_to" : "assignee@email.com"
-}
- ```
- - The access_token must belong to the creator
+  - Request to create the issue with the following body
+   ```
+   {
+    "title" : "New Issue Title",
+    "description" : "Some Description",
+    "author" : "creator@email.com",
+    "assigned_to" : "assignee@email.com"
+  }
+   ```
+  - The access_token must belong to the creator
 
 * #### DELETE localhost:8000/issue/<issue_id>
   - The creator of an issue can delete the issue via the issue id
@@ -94,12 +94,11 @@ python api.py
 * #### PUT localhost:8000/issue/<issue_id>
   - The creator of an issue can alter the issue contents with the following body data
   ```
-  {
-"title" : "New Title",
-"description" : "Some Description",
-"assigned_to" : "new_assignee@email.com",
-"status" : "CLOSE"
-}
+  { "title" : "New Title",
+  "description" : "Some Description",
+  "assigned_to" : "new_assignee@email.com",
+  "status" : "CLOSE"
+  }
   ```
 
 On creation of an issue the assigned user will get an email after 12 mins with the details of the Issue assigned.
