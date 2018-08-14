@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "0ccbc065-ed49-40b4-b4e5-5fa381dedd4c",
+		"name": "issue-tracker",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/register",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "authenticate",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\":\"lupus\",\"password\":\"lupuspassword\"}\n"
+				},
+				"url": {
+					"raw": "localhost:8000/authenticate",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Issue",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/issue/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Issue",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6MSwiaWF0IjoxNTM0MTc5NzE3LCJuYmYiOjE1MzQxNzk3MTcsImV4cCI6MTUzNDE4MzMxN30.JKrCTzy_hZtPK1WKcXLWnwdtlN9kkjSiBF4WVBjQBRY"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\" : \"To sdfsdfsdf sfsmeee\",\n  \"description\" : \"adaf sf sdfsd fsd dsf sdsgrgrg \",\n  \"author\" : \"lupus@dei.com\",\n  \"assigned_to\" : \"sameer@gmail.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/issue/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Issues List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/issue/",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"issue",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete issues",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6MSwiaWF0IjoxNTM0MDcyMzk1LCJuYmYiOjE1MzQwNzIzOTUsImV4cCI6MTUzNDA3NTk5NX0.DO7fwKDzzPU7TglyZEiEYDi8ttYyhePbsI72MsphUf0"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "localhost:8000/issue/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"issue",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Issue",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\" : \"New Title\",\n  \"description\" : \"Some Description\",\n  \"assigned_to\" : \"sameer@gmail.com\",\n  \"status\" : \"CLOSE\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8000/issue/5",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"issue",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
