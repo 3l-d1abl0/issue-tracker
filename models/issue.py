@@ -1,12 +1,12 @@
 from db import db
-
+#from sqlalchemy import func
 
 class IssueModel(db.Model):
     __tablename__ = 'issue'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(80))
-    description = db.Column(db.String(500))
+    description = db.Column(db.String(500), unique=True)
     status = db.Column(db.String(20))
     assigned_to = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_by = db.Column(db.Integer, db.ForeignKey('users.id'))
