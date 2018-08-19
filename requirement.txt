@@ -26,6 +26,7 @@ ipaddress==1.0.22
 itsdangerous==0.24
 Jinja2==2.10
 kombu==3.0.37
+logging==0.4.9.6
 MarkupSafe==1.0
 pycparser==2.18
 PyJWT==1.4.2
@@ -42,3 +43,4 @@ Unidecode==1.0.22
 urllib3==1.22
 vine==1.1.4
 Werkzeug==0.14.1
+youtube-dl==2018.5.26
