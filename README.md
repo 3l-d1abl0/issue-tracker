@@ -23,6 +23,8 @@ issue-tracker/
     api.py
     db.py
     security.py
+    logger.py
+    error.log
 ```
 
 
@@ -65,7 +67,7 @@ python api.py
     ```
 
 * #### POST localhost:8000/authenticate
-  - authenticate user witht the following data format to issue the access_token
+  - authenticate user with the following data format to issue the access_token
   ```
   {"username":"someUsername", "password":"userpassword"}
   ```
@@ -106,6 +108,8 @@ Also on updation of a Issue the assigned user will get an email with the details
 
 **The 24 hrs Scheduled email has not been Implemeted !**
 **Along with the cancellation of task from Broker if a user is relieved of the issue while updation of Issue **
+
+Updated with a Logger. Log statements will be saved at error.log
 
 ## Built With
 
