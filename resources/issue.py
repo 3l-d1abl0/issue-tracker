@@ -5,6 +5,9 @@ from models.user import UserModel
 from new_celery.tasks import send_email_task
 from celery import Celery
 import smtplib
+from sqlalchemy.exc import IntegrityError
+
+from logger import logger
 
 class Issue(Resource):
     @jwt_required()
@@ -54,7 +57,12 @@ class Issue(Resource):
                     issue.assigned_to = assigned_to.id if assigned_to.id else issue.assigned_to
                     issue.status = data['status'] if data['status'] else issue.status
                     issue.save_to_db()
-                    task = send_email_task.apply_async(args=[data['assigned_to'],issue.title,issue.description],countdown=720)
+
+                    try:
+                        task = send_email_task.apply_async(args=[data['assigned_to'],issue.title,issue.description],countdown=720)
+                    except Exception as e:
+                        logger.debug(e)
+
                     return issue.json()
                 else:
                     return {'message': 'User with email : {} does not Exist !'.format(data['assigned_to'])},400
@@ -62,11 +70,6 @@ class Issue(Resource):
                 return {'message': 'Unauthorized !'}, 403
         else:
             return {'message': 'Issue not found !'}, 404
-
-
-class IssueList(Resource):
-    def get(self):
-        return {'issues': list(map(lambda x: x.json(), IssueModel.query.all()))}
 
 class IssueCreate(Resource):
     parser = reqparse.RequestParser()
@@ -76,13 +79,11 @@ class IssueCreate(Resource):
     #parser.add_argument('author',type=str, required=True, help="This field cannot be left blank!")
     #parser.add_argument('status',type=str, required=True, help="This field cannot be left blank!")
 
-    @jwt_required()
-    def get(self):
-        return {'issues': list(map(lambda x: x.json(), IssueModel.query.all()))}
 
     @jwt_required()
     def post(self):
         data = IssueCreate.parser.parse_args()
+
         #created_by = UserModel.find_by_email(data['author']).json()
         assigned_to = UserModel.find_by_email(data['assigned_to'])
 
@@ -95,10 +96,18 @@ class IssueCreate(Resource):
             issue.save_to_db()
             # send the email
             #print 'TO: {}'.format(data['assigned_to'])
-            task = send_email_task.apply_async(args=[data['assigned_to'],data['title'],data['description']],countdown=720)
-            #print task
+            try:
+                task = send_email_task.apply_async(args=[data['assigned_to'],data['title'],data['description']],countdown=720)
+                #print task
+            except Exception as e:
+                logger.debug(e)
+
+        except IntegrityError as e:
+            logger.debug(e)
+            return {"message": "Check if Issue is not Duplicate."}, 400
         except Exception as e:
-            #print e
             return {"message": "An error occurred while creating issue."}, 500
+
+
         #print issue.json()
         return {"message" : "Issue Created", "issue_id": issue.id, "title": data['title'], "description": data['description'], "assigned_to": data['assigned_to'] }, 201
