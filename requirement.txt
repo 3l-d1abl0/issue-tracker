@@ -40,7 +40,7 @@ SQLAlchemy==1.2.10
 tornado==5.1
 tqdm==4.23.4
 Unidecode==1.0.22
-urllib3==1.22
+urllib3==1.26.5
 vine==1.1.4
 Werkzeug==0.14.1
 youtube-dl==2018.5.26
